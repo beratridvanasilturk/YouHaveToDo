@@ -10,11 +10,11 @@ import UIKit
 
 class YouHaveToDoViewController: UITableViewController {
     //MARK: - Variables
-    var row0chosen = false
-    var row1chosen = false
-    var row2chosen = false
-    var row3chosen = false
-    var row4chosen = false
+      var row0item = ToDoListItem()
+      var row1item = ToDoListItem()
+      var row2item = ToDoListItem()
+      var row3item = ToDoListItem()
+      var row4item = ToDoListItem()
     //MARK: - Outlets
     
     //MARK: - Functions
@@ -28,21 +28,17 @@ class YouHaveToDoViewController: UITableViewController {
         var isChecked = false
         
         if indexPath.row == 0 {
-            isChecked = row0chosen
+          isChecked = row0item.chosen
+        } else if indexPath.row == 1 {
+          isChecked = row1item.chosen
+        } else if indexPath.row == 2 {
+          isChecked = row2item.chosen
+        } else if indexPath.row == 3 {
+          isChecked = row3item.chosen
+        } else if indexPath.row == 4 {
+          isChecked = row4item.chosen
         }
-        if indexPath.row == 1 {
-            isChecked = row1chosen
-        }
-        if indexPath.row == 2 {
-            isChecked = row2chosen
-        }
-        if indexPath.row == 3 {
-            isChecked = row3chosen
-        }
-        if indexPath.row == 4 {
-            isChecked = row4chosen
 
-        }
         
         if isChecked == true {
             cell.accessoryType = .checkmark
@@ -64,37 +60,37 @@ class YouHaveToDoViewController: UITableViewController {
         let label = cell.viewWithTag(1000) as! UILabel
         
         if indexPath.row == 0 {
-            label.text = "1. Row"
+          label.text = row0item.text
         } else if indexPath.row == 1 {
-            
-            label.text = "2. Row"
+          label.text = row1item.text
         } else if indexPath.row == 2 {
-            label.text = "3. Row"
+          label.text = row2item.text
         } else if indexPath.row == 3 {
-            label.text = "4. Row"
+          label.text = row3item.text
         } else if indexPath.row == 4 {
-            label.text = "5. Row"
+          label.text = row4item.text
         }
         
         configureToDoList(for: cell, at: indexPath)
         return cell
-        //MARK: - Actions
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let cell = tableView.cellForRow(at: indexPath) {
-          if indexPath.row == 0 {
-            row0chosen.toggle()
-          } else if indexPath.row == 1 {
-            row1chosen.toggle()
-          } else if indexPath.row == 2 {
-            row2chosen.toggle()
-          } else if indexPath.row == 3 {
-            row3chosen.toggle()
-          } else if indexPath.row == 4 {
-            row4chosen.toggle()
-          }
+            
+            if indexPath.row == 0 {
+              row0item.chosen.toggle()
+            } else if indexPath.row == 1 {
+              row1item.chosen.toggle()
+            } else if indexPath.row == 2 {
+              row2item.chosen.toggle()
+            } else if indexPath.row == 3 {
+              row3item.chosen.toggle()
+            } else if indexPath.row == 4 {
+              row4item.chosen.toggle()
+            }
           configureToDoList(for: cell, at: indexPath)
         }
         tableView.deselectRow(at: indexPath, animated: true)
