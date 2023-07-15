@@ -10,6 +10,9 @@ import UIKit
 
 class YouHaveToDoViewController: UITableViewController {
     //MARK: - Variables
+    
+    var items = [ToDoListItem]()
+    
       var row0item = ToDoListItem()
       var row1item = ToDoListItem()
       var row2item = ToDoListItem()
@@ -20,38 +23,47 @@ class YouHaveToDoViewController: UITableViewController {
     //MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
+       
+          let item1 = ToDoListItem()
+          item1.text = "Walk the dog"
+          items.append(item1)
+
+          let item2 = ToDoListItem()
+          item2.text = "Brush my teeth"
+          item2.chosen = true
+          items.append(item2)
+
+          let item3 = ToDoListItem()
+          item3.text = "Learn iOS development"
+          item3.chosen = true
+          items.append(item3)
+
+          let item4 = ToDoListItem()
+          item4.text = "Soccer practice"
+          items.append(item4)
+
+          let item5 = ToDoListItem()
+          item5.text = "Eat ice cream"
+          items.append(item5)
+        }
+    
     
     func configureToDoList(for cell: UITableViewCell, at indexPath: IndexPath){
         
         
-        var isChecked = false
-        
-        if indexPath.row == 0 {
-          isChecked = row0item.chosen
-        } else if indexPath.row == 1 {
-          isChecked = row1item.chosen
-        } else if indexPath.row == 2 {
-          isChecked = row2item.chosen
-        } else if indexPath.row == 3 {
-          isChecked = row3item.chosen
-        } else if indexPath.row == 4 {
-          isChecked = row4item.chosen
-        }
+        let item = items[indexPath.row]
 
-        
-        if isChecked == true {
+          if item.chosen {
             cell.accessoryType = .checkmark
-        } else {
+          } else {
             cell.accessoryType = .none
-    }
-        
-        
-    }
+          }
+        }
+    
     
     // MARK: - Table View Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -70,7 +82,6 @@ class YouHaveToDoViewController: UITableViewController {
         } else if indexPath.row == 4 {
           label.text = row4item.text
         }
-        
         configureToDoList(for: cell, at: indexPath)
         return cell
         
@@ -80,21 +91,13 @@ class YouHaveToDoViewController: UITableViewController {
         
         if let cell = tableView.cellForRow(at: indexPath) {
             
-            if indexPath.row == 0 {
-              row0item.chosen.toggle()
-            } else if indexPath.row == 1 {
-              row1item.chosen.toggle()
-            } else if indexPath.row == 2 {
-              row2item.chosen.toggle()
-            } else if indexPath.row == 3 {
-              row3item.chosen.toggle()
-            } else if indexPath.row == 4 {
-              row4item.chosen.toggle()
-            }
-          configureToDoList(for: cell, at: indexPath)
+            let item = items[indexPath.row]
+            item.chosen.toggle()
+
+            configureToDoList(for: cell, at: indexPath)
+          }
+          tableView.deselectRow(at: indexPath, animated: true)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
-      }
     
     
 }
