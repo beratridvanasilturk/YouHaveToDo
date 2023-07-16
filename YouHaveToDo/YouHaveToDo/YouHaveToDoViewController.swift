@@ -12,12 +12,7 @@ class YouHaveToDoViewController: UITableViewController {
     //MARK: - Variables
     
     var items = [ToDoListItem]()
-    
-      var row0item = ToDoListItem()
-      var row1item = ToDoListItem()
-      var row2item = ToDoListItem()
-      var row3item = ToDoListItem()
-      var row4item = ToDoListItem()
+   
     //MARK: - Outlets
     
     //MARK: - Functions
@@ -72,16 +67,17 @@ class YouHaveToDoViewController: UITableViewController {
         let label = cell.viewWithTag(1000) as! UILabel
         
         if indexPath.row == 0 {
-          label.text = row0item.text
+            label.text = items[0].text
         } else if indexPath.row == 1 {
-          label.text = row1item.text
+            label.text = items[1].text
         } else if indexPath.row == 2 {
-          label.text = row2item.text
+          label.text = items[2].text
         } else if indexPath.row == 3 {
-          label.text = row3item.text
+          label.text = items[3].text
         } else if indexPath.row == 4 {
-          label.text = row4item.text
+          label.text = items[4].text
         }
+        
         configureToDoList(for: cell, at: indexPath)
         return cell
         
@@ -98,7 +94,6 @@ class YouHaveToDoViewController: UITableViewController {
           }
           tableView.deselectRow(at: indexPath, animated: true)
         }
-    
     
 }
 
