@@ -40,6 +40,9 @@ class YouHaveToDoViewController: UITableViewController {
           let item5 = ToDoListItem()
           item5.text = "Eat ice cream"
           items.append(item5)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         }
     
     
@@ -94,6 +97,25 @@ class YouHaveToDoViewController: UITableViewController {
           }
           tableView.deselectRow(at: indexPath, animated: true)
         }
+    
+        //MARK: - Actions
+    
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        
+        let newRowIndex = items.count
+        // Yeni bir ToDoListItem nesnesi oluşturuldu.
+        let item = ToDoListItem()
+        item.text = "New Row"
+        // Veri modeline eklendi.
+        items.append(item)
+        //Tablo görünümüne yeni satır hakkında bilgi vermemiz gerekir, böylece bu satır için yeni bir hücre ekleyebilir. Dolayısıyla, önce newRowIndex değişkenindeki satır numarasını kullanarak yeni satıra işaret eden bir IndexPath nesnesi oluşturursunuz.
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        // Bu satır, yalnızca bir index o path öğesini tutan yeni, geçici bir dizi oluşturur.
+        let indexPaths = [indexPath]
+        // Bu yöntem aslında isterseniz aynı anda birden fazla satır eklemenize olanak tanır.
+        tableView.insertRows(at: indexPaths, with: .automatic)
+        
+    }
     
 }
 

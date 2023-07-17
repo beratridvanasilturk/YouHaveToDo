@@ -8,6 +8,6 @@
 import Foundation
 
 class ToDoListItem {
-    var text = "A"
+    var text = ""
     var chosen = false
 }
