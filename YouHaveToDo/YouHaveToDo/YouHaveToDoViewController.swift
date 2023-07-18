@@ -20,34 +20,31 @@ class YouHaveToDoViewController: UITableViewController {
         super.viewDidLoad()
         
         let item1 = ToDoListItem()
-        item1.text = "Walk the dog"
+        item1.text = "First Task"
         items.append(item1)
         
         let item2 = ToDoListItem()
-        item2.text = "Brush my teeth"
+        item2.text = "Second Task"
         item2.chosen = true
         items.append(item2)
         
         let item3 = ToDoListItem()
-        item3.text = "Learn iOS development"
+        item3.text = "Third Task"
         item3.chosen = true
         items.append(item3)
         
         let item4 = ToDoListItem()
-        item4.text = "Soccer practice"
+        item4.text = "Fourth Task"
         items.append(item4)
         
         let item5 = ToDoListItem()
-        item5.text = "Eat ice cream"
+        item5.text = "Fifth Task"
         items.append(item5)
         
-        navigationController?.navigationBar.prefersLargeTitles = true
         
     }
     
-    
     func configureToDoList(for cell: UITableViewCell, at indexPath: IndexPath){
-        
         
         let item = items[indexPath.row]
         
@@ -117,12 +114,10 @@ class YouHaveToDoViewController: UITableViewController {
         items.append(item)
         //Tablo görünümüne yeni satır hakkında bilgi vermemiz gerekir, böylece bu satır için yeni bir hücre ekleyebilir. Dolayısıyla, önce newRowIndex değişkenindeki satır numarasını kullanarak yeni satıra işaret eden bir IndexPath nesnesi oluşturursunuz.
         let indexPath = IndexPath(row: newRowIndex, section: 0)
-        // Bu satır, yalnızca bir index o path öğesini tutan yeni, geçici bir dizi oluşturur.
+        // Bu satır, yalnızca bir index path öğesini tutan yeni, geçici bir dizi oluşturur.
         let indexPaths = [indexPath]
         // Bu yöntem aslında isterseniz aynı anda birden fazla satır eklemenize olanak tanır.
         tableView.insertRows(at: indexPaths, with: .automatic)
-        
     }
-    
 }
 

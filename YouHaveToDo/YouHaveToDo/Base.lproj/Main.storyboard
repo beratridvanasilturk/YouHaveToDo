@@ -17,14 +17,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="YouHaveToDoItem" id="RSO-iZ-cex">
-                                <rect key="frame" x="0.0" y="50" width="393" height="21"/>
+                                <rect key="frame" x="0.0" y="50" width="393" height="21.333333969116211"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RSO-iZ-cex" id="BbG-uJ-H87">
-                                    <rect key="frame" x="0.0" y="0.0" width="349" height="21"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="349" height="21.333333969116211"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fxw-gC-qdt">
-                                            <rect key="frame" x="30.000000000000004" y="0.0" width="41.333333333333343" height="21"/>
+                                            <rect key="frame" x="30.000000000000004" y="0.0" width="41.333333333333343" height="21.333333333333332"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -44,10 +44,10 @@
                             <outlet property="delegate" destination="cPD-oy-B8I" id="qae-Ul-YN5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="YouHaveToDo" id="tWt-Em-VYd">
+                    <navigationItem key="navigationItem" title="YouHaveToDo" largeTitleDisplayMode="never" id="tWt-Em-VYd">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QE5-41-epX">
                             <connections>
-                                <action selector="addButtonTapped:" destination="cPD-oy-B8I" id="D3C-Au-vMJ"/>
+                                <segue destination="4K6-H1-n4W" kind="show" id="WHL-wk-fXS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -55,6 +55,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jjj-Gj-dep" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1049.6183206106871" y="-317.6056338028169"/>
+        </scene>
+        <!--Add Item View Controller-->
+        <scene sceneID="fcL-4K-VcQ">
+            <objects>
+                <tableViewController id="4K6-H1-n4W" customClass="AddItemViewController" customModule="YouHaveToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="N9v-9a-oun">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="BeI-Kl-Nan">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="XJr-ON-gjC">
+                                        <rect key="frame" x="0.0" y="18" width="393" height="19.333333969116211"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XJr-ON-gjC" id="B3g-a0-P31">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="19.333333969116211"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add New Task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tXO-yF-icx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="393" height="19.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tXO-yF-icx" firstAttribute="top" secondItem="B3g-a0-P31" secondAttribute="top" id="FYe-Bb-62J"/>
+                                                <constraint firstAttribute="trailing" secondItem="tXO-yF-icx" secondAttribute="trailing" id="VAM-FQ-QR2"/>
+                                                <constraint firstAttribute="bottom" secondItem="tXO-yF-icx" secondAttribute="bottom" id="sRg-6U-vIM"/>
+                                                <constraint firstItem="tXO-yF-icx" firstAttribute="leading" secondItem="B3g-a0-P31" secondAttribute="leading" id="xLI-pz-6XF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="4K6-H1-n4W" id="qU1-UA-c7e"/>
+                            <outlet property="delegate" destination="4K6-H1-n4W" id="gcn-yE-WPw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="dgu-Kp-GiK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="VfS-4o-rVW">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="4K6-H1-n4W" id="P68-tB-MU1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kvu-1F-3nS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2054" y="-318"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zPP-O0-Fkx">
