@@ -19,6 +19,12 @@ class AddItemViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - Table View Delegates
+    // Satir secildikten sonra o satira ait gri arka plan gorunumu kaldirir.
+//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+//        return nil
+//    }
+    
     
     /*
     // MARK: - Navigation
