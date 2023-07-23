@@ -6,21 +6,24 @@
 //
 
 import UIKit
-
-class AddItemViewController: UITableViewController {
-
+// Class'a delege atamamiz tek basina bir anlam ifade etmez. Text Field'a kendisi için bir temsilcisi olduğunu bildirmemiz gerekir.
+class AddItemViewController: UITableViewController, UITextFieldDelegate {
+    // MARK: - Outlets
+    @IBOutlet var doneBarButton: UIBarButtonItem!
     @IBOutlet var textField: UITextField!
-    
+    // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
-    // Note: sender: Any olmadan text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
+    // MARK: - Actions
+    // Note: "sender: Any" seklindeki yapi baska bir semder biciminde olursa text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
     @IBAction func doneButtonTapped(_ sender: Any) {
+        
         print("Girilen metin: \(textField.text!)")
         navigationController?.popViewController(animated: true)
+        
     }
     
     
@@ -34,7 +37,32 @@ class AddItemViewController: UITableViewController {
         // Bu satir add ekrani acildiginda textfield'a tiklamadan klavyenin hemen acilmasini saglar
         textField.becomeFirstResponder()
     }
+    // Bu kod satirinin amaci Done button'unu text fieldda metin olmadigi durumlarda devre disi birakarak bos bir task'i todo listemize eklemeyi onlemektir.
+    // Bu kod satiri UITextField delege yontemlerinden biridir. Kullanici klavyeye her dokundugunda veya cut/paste yoluyla metni her degistirdiginde cagrilir. "textField(_:shouldChangeCharactersIn:replacementString:)" delege yöntemi size yeni metni vermez, yalnızca metnin hangi kısmının değiştirilmesi gerektiğini verir.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Yukarıdaki kodda, NSRange olarak bir parametre alırsınız ve bunu bir Range değerine dönüştürürsünüz. Orjinal NSRange değerini neden bir Range değerine dönüştürdüğümüzü merak edebilirsiniz. NSRange bir Objective-C yapısıdır, Range ise Swift eşdeğeridir.
+        
+        // Ilk olarak yeni metnin ne olacagini belirleriz
+        // Text Field'in metnini alarak ve değiştirme işlemini kendiniz yaparak yeni metnin ne olacağını hesaplamanız gerekir. Bu size newText sabitinde sakladığınız yeni bir array nesnesi verir.
+        let oldText = textField.text!
+        let stringRange = Range(range, in: oldText)!
+        let newText = oldText.replacingCharacters(in: stringRange, with: string)
+        
+        // Yeni metni oluşturduktan sonra, boş olup olmadığını kontrol edip ve Done düğmesini buna göre etkinleştirir veya devre dışı bırakıriz.
+        if newText.isEmpty {
+            doneBarButton.isHidden = true
+        } else {
+            doneBarButton.isEnabled = true
+        }
+        // Yukaridaki if else yerine basitlestirilmis olarak "doneBarButton.isEnabled = !newText.isEmpty" kullanabilirdik.
+        return true
+    }
     
+    // Bu kod satiri Main'de text field'daki "clear button" seceneginin "appeirs while editing" secenegi seciliyken clear dugmesini dogru sekilde islemek ve done buttonu devre disi birakmak icin kullanilir.
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        doneBarButton.isEnabled = false
+        return true
+    }
     
     /*
     // MARK: - Navigation
