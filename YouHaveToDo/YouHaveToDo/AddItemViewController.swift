@@ -9,21 +9,31 @@ import UIKit
 
 class AddItemViewController: UITableViewController {
 
+    @IBOutlet var textField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
-    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
+    // Note: sender: Any olmadan text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        print("Girilen metin: \(textField.text!)")
         navigationController?.popViewController(animated: true)
     }
     
+    
     // MARK: - Table View Delegates
     // Satir secildikten sonra o satira ait gri arka plan gorunumu kaldirir.
-//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//        return nil
-//    }
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Bu satir add ekrani acildiginda textfield'a tiklamadan klavyenin hemen acilmasini saglar
+        textField.becomeFirstResponder()
+    }
     
     
     /*
