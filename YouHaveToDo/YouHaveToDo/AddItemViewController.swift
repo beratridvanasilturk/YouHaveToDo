@@ -6,18 +6,22 @@
 //
 
 import UIKit
-
+// Kullanici cancel butonuna tikladiginda cagrilan 1 func, done butonuna tikladiginda cagrilan 2 func vardir.
 protocol AddItemViewControllerDelegate: AnyObject {
     
     func addItemViewControllerDidCancel(_ controller: AddItemViewController)
     // didFinishAdding parametresi yeni ToDoListItem nesnesini iletir.
     func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem)
+    // Yeni bir öğe ekledikten sonra didFinishAdding yöntemini çağırırsınız, ancak mevcut bir öğeyi düzenlerken artık bunun yerine didFinishEditing yöntemi çağrılmalıdır.
+    func addItemViewController(_ controller: AddItemViewController, didFinishEditing item: ToDoListItem)
+    
 }
 
 // Class'a delege atamamiz tek basina bir anlam ifade etmez. Text Field'a kendisi için bir temsilcisi olduğunu bildirmemiz gerekir.
 class AddItemViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Variables
     weak var delegate: AddItemViewControllerDelegate?
+    var itemToEdit: ToDoListItem?
     // MARK: - Outlets
     @IBOutlet var doneBarButton: UIBarButtonItem!
     @IBOutlet var cancelBarButton: UIBarButtonItem!
@@ -25,6 +29,13 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // This name is "variable shadowing". Ve unwrapp edilirken yaygin kullanilan bir durumdur.
+        if let itemToEdit = itemToEdit {
+            title = "Edit Item"
+            textField.text = itemToEdit.text
+            doneBarButton.isEnabled = true
+        }
     }
     // MARK: - Actions
     // Note: "sender: Any" seklindeki yapi baska bir semder biciminde olursa text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
@@ -36,16 +47,16 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         
-        let item = ToDoListItem()
-        item.text = textField.text!
-        
-        
-        // Mesaj addItemViewController(_:didFinishAdding:) olur ve metin alanındaki metin dizesini içeren yeni bir ToDoListItem nesnesi iletirsiniz.
-        delegate?.addItemViewController(self, didFinishAdding: item)
-        
-        print("Girilen metin: \(textField.text!)")
-        navigationController?.popViewController(animated: true)
-        
+        // İlk olarak itemToEdit özelliğinin bir nesne içerip içermediğini kontrol eder. Nil degilse metin alanındaki metni o anki mevcut ToDoListItem nesnesine yerleştirir ve ardından yeni temsilci yöntemini çağırırsınız.
+        if let item = itemToEdit {
+            item.text = textField.text!
+            delegate?.addItemViewController(self, didFinishEditing: item)
+        } else {
+            // itemToEdit öğesinin nil olması durumunda, kullanıcı yeni bir öğe ekler.
+            let item = ToDoListItem()
+            item.text = textField.text!
+            delegate?.addItemViewController(self, didFinishAdding: item)
+        }
     }
     
     

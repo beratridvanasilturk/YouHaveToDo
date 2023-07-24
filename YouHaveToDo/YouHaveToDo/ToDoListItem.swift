@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ToDoListItem {
+class ToDoListItem: NSObject {
     
     var text = ""
     var chosen = false
