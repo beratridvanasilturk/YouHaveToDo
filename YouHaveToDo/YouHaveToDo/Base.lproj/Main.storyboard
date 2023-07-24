@@ -47,7 +47,7 @@
                     <navigationItem key="navigationItem" title="YouHaveToDo" largeTitleDisplayMode="never" id="tWt-Em-VYd">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QE5-41-epX">
                             <connections>
-                                <segue destination="4K6-H1-n4W" kind="show" identifier="Add Item" id="WHL-wk-fXS"/>
+                                <segue destination="4K6-H1-n4W" kind="show" identifier="AddItem" id="WHL-wk-fXS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -113,6 +113,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelBarButton" destination="ze1-me-Tcv" id="HKC-pt-Mad"/>
                         <outlet property="doneBarButton" destination="VfS-4o-rVW" id="eFe-kX-aTo"/>
                         <outlet property="textField" destination="tXO-yF-icx" id="7S4-Eo-enh"/>
                     </connections>

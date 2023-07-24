@@ -9,6 +9,7 @@ import UIKit
 
 protocol AddItemViewControllerDelegate: AnyObject {
     func addItemViewControllerDidCancel(_ controller: AddItemViewController)
+    // didFinishAdding parametresi yeni ToDoListItem nesnesini iletir.
     func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem)
 }
 
@@ -18,6 +19,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     weak var delegate: AddItemViewControllerDelegate?
     // MARK: - Outlets
     @IBOutlet var doneBarButton: UIBarButtonItem!
+    @IBOutlet var cancelBarButton: UIBarButtonItem!
     @IBOutlet var textField: UITextField!
     // MARK: - Functions
     override func viewDidLoad() {
