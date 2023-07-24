@@ -8,7 +8,26 @@
 // FIXME: Some todo list issues should be fix
 import UIKit
 
-class YouHaveToDoViewController: UITableViewController {
+class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDelegate {
+    
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+        
+        navigationController?.popViewController(animated: true)
+        
+    }
+    
+    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem) {
+        
+        let newRowIndex = items.count
+        items.append(item)
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        tableView.insertRows(at: indexPaths, with: .automatic)
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
     //MARK: - Variables
     
     var items = [ToDoListItem]()
@@ -100,6 +119,19 @@ class YouHaveToDoViewController: UITableViewController {
         items.remove(at: indexPath.row)
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
+    }
+    
+    override func prepare(
+        for segue: UIStoryboardSegue,
+        sender: Any?
+    ) {
+        if segue.identifier == "AddItem" {
+            
+            let controller = segue.destination as! AddItemViewController
+            
+            controller.delegate = self
+            
+        }
     }
     
         //MARK: - Actions

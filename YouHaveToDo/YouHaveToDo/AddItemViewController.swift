@@ -6,8 +6,16 @@
 //
 
 import UIKit
+
+protocol AddItemViewControllerDelegate: AnyObject {
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController)
+    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem)
+}
+
 // Class'a delege atamamiz tek basina bir anlam ifade etmez. Text Field'a kendisi için bir temsilcisi olduğunu bildirmemiz gerekir.
 class AddItemViewController: UITableViewController, UITextFieldDelegate {
+    // MARK: - Variables
+    weak var delegate: AddItemViewControllerDelegate?
     // MARK: - Outlets
     @IBOutlet var doneBarButton: UIBarButtonItem!
     @IBOutlet var textField: UITextField!
@@ -19,7 +27,20 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     }
     // MARK: - Actions
     // Note: "sender: Any" seklindeki yapi baska bir semder biciminde olursa text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        
+        // Kullanıcı İptal düğmesine dokunduğunda, addItemViewControllerDidCancel(_:) mesajını delegeye geri gönderirsiniz.
+        delegate?.addItemViewControllerDidCancel(self)
+        
+    }
+    
     @IBAction func doneButtonTapped(_ sender: Any) {
+        
+        let item = ToDoListItem()
+        item.text = textField.text!
+        
+        // Mesaj addItemViewController(_:didFinishAdding:) olur ve metin alanındaki metin dizesini içeren yeni bir ToDoListItem nesnesi iletirsiniz.
+        delegate?.addItemViewController(self, didFinishAdding: item)
         
         print("Girilen metin: \(textField.text!)")
         navigationController?.popViewController(animated: true)
@@ -75,3 +96,5 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     */
 
 }
+
+

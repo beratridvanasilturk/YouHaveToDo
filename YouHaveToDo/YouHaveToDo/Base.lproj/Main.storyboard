@@ -47,7 +47,7 @@
                     <navigationItem key="navigationItem" title="YouHaveToDo" largeTitleDisplayMode="never" id="tWt-Em-VYd">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QE5-41-epX">
                             <connections>
-                                <segue destination="4K6-H1-n4W" kind="show" id="WHL-wk-fXS"/>
+                                <segue destination="4K6-H1-n4W" kind="show" identifier="Add Item" id="WHL-wk-fXS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -56,7 +56,7 @@
             </objects>
             <point key="canvasLocation" x="1049.6183206106871" y="-317.6056338028169"/>
         </scene>
-        <!--Add Item View Controller-->
+        <!--Add Item-->
         <scene sceneID="fcL-4K-VcQ">
             <objects>
                 <tableViewController id="4K6-H1-n4W" customClass="AddItemViewController" customModule="YouHaveToDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -100,7 +100,12 @@
                             <outlet property="delegate" destination="4K6-H1-n4W" id="gcn-yE-WPw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="dgu-Kp-GiK">
+                    <navigationItem key="navigationItem" title="Add Item" id="dgu-Kp-GiK">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="ze1-me-Tcv">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="4K6-H1-n4W" id="cFe-wr-ICv"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="VfS-4o-rVW">
                             <connections>
                                 <action selector="doneButtonTapped:" destination="4K6-H1-n4W" id="eJb-7O-jqN"/>
@@ -114,7 +119,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kvu-1F-3nS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2054" y="-318"/>
+            <point key="canvasLocation" x="2059" y="-318"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zPP-O0-Fkx">
