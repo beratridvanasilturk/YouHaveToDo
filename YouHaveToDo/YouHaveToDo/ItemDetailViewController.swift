@@ -7,20 +7,20 @@
 
 import UIKit
 // Kullanici cancel butonuna tikladiginda cagrilan 1 func, done butonuna tikladiginda cagrilan 2 func vardir.
-protocol AddItemViewControllerDelegate: AnyObject {
+protocol ItemDetailViewControllerDelegate: AnyObject {
     
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController)
+    func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController)
     // didFinishAdding parametresi yeni ToDoListItem nesnesini iletir.
-    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem)
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ToDoListItem)
     // Yeni bir öğe ekledikten sonra didFinishAdding yöntemini çağırırsınız, ancak mevcut bir öğeyi düzenlerken artık bunun yerine didFinishEditing yöntemi çağrılmalıdır.
-    func addItemViewController(_ controller: AddItemViewController, didFinishEditing item: ToDoListItem)
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ToDoListItem)
     
 }
 
 // Class'a delege atamamiz tek basina bir anlam ifade etmez. Text Field'a kendisi için bir temsilcisi olduğunu bildirmemiz gerekir.
-class AddItemViewController: UITableViewController, UITextFieldDelegate {
+class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Variables
-    weak var delegate: AddItemViewControllerDelegate?
+    weak var delegate: ItemDetailViewControllerDelegate?
     var itemToEdit: ToDoListItem?
     // MARK: - Outlets
     @IBOutlet var doneBarButton: UIBarButtonItem!
@@ -37,12 +37,14 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
             doneBarButton.isEnabled = true
         }
     }
+    
+    
     // MARK: - Actions
     // Note: "sender: Any" seklindeki yapi baska bir semder biciminde olursa text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
     @IBAction func cancelButtonTapped(_ sender: Any) {
         
-        // Kullanıcı İptal düğmesine dokunduğunda, addItemViewControllerDidCancel(_:) mesajını delegeye geri gönderirsiniz.
-        delegate?.addItemViewControllerDidCancel(self)
+        // Kullanıcı İptal düğmesine dokunduğunda, itemDetailViewControllerDidCancel(_:) mesajını delegeye geri gönderirsiniz.
+        delegate?.itemDetailViewControllerDidCancel(self)
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
@@ -50,12 +52,12 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
         // İlk olarak itemToEdit özelliğinin bir nesne içerip içermediğini kontrol eder. Nil degilse metin alanındaki metni o anki mevcut ToDoListItem nesnesine yerleştirir ve ardından yeni temsilci yöntemini çağırırsınız.
         if let item = itemToEdit {
             item.text = textField.text!
-            delegate?.addItemViewController(self, didFinishEditing: item)
+            delegate?.itemDetailViewController(self, didFinishEditing: item)
         } else {
             // itemToEdit öğesinin nil olması durumunda, kullanıcı yeni bir öğe ekler.
             let item = ToDoListItem()
             item.text = textField.text!
-            delegate?.addItemViewController(self, didFinishAdding: item)
+            delegate?.itemDetailViewController(self, didFinishAdding: item)
         }
     }
     

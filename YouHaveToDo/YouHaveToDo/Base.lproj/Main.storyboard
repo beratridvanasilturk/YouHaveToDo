@@ -48,7 +48,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="4K6-H1-n4W" kind="show" identifier="EditItem" id="pmN-6F-lJT"/>
+                                    <segue destination="4K6-H1-n4W" kind="show" identifier="EditItem" trigger="accessoryAction" id="Zy1-di-vFS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -72,7 +72,7 @@
         <!--AddItem-->
         <scene sceneID="fcL-4K-VcQ">
             <objects>
-                <tableViewController id="4K6-H1-n4W" customClass="AddItemViewController" customModule="YouHaveToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4K6-H1-n4W" customClass="ItemDetailViewController" customModule="YouHaveToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="46" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="N9v-9a-oun">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,7 +155,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="pmN-6F-lJT"/>
+        <segue reference="Zy1-di-vFS"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

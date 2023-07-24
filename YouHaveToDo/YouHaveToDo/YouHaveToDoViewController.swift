@@ -8,7 +8,7 @@
 // FIXME: Some todo list issues should be fix
 import UIKit
 
-class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDelegate {
+class YouHaveToDoViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
     //MARK: - Variables
     
@@ -41,7 +41,6 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
         let item5 = ToDoListItem()
         item5.text = "Fifth Task"
         items.append(item5)
-        
     }
     
     override func prepare(
@@ -49,10 +48,10 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
         sender: Any?
     ) {
         if segue.identifier == "AddItem" {
-            let controller = segue.destination as! AddItemViewController
+            let controller = segue.destination as! ItemDetailViewController
             controller.delegate = self
         } else if segue.identifier == "EditItem" {
-            let controller = segue.destination as! AddItemViewController
+            let controller = segue.destination as! ItemDetailViewController
             controller.delegate = self
             
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
@@ -115,12 +114,12 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
     }
     
     // MARK: - Add Item ViewController Delegates
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+    func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
         navigationController?.popViewController(animated: true)
     }
     
     
-    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem) {
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ToDoListItem) {
         
         let newRowIndex = items.count
         items.append(item)
@@ -132,7 +131,7 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
         navigationController?.popViewController(animated: true)
     }
     
-    func addItemViewController(_ controller: AddItemViewController, didFinishEditing item: ToDoListItem) {
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ToDoListItem) {
         
         if let index = items.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
@@ -145,6 +144,8 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
     
     
     //MARK: - Actions
+    @IBAction func editButtonTapped(_ sender: Any) {
+    }
     // Satırların her zaman hem veri modelinize hem de tablo görünümüne eklenmesi gerektiğini unutmayın. Tablo görünümüne insertRows(at:with:) mesajını gönderdiğinizde şunu söylemiş olursunuz: "Hey table, data modelime bir grup yeni item eklendi." Bu çok önemlidir! Tablo görünümüne yeni öğelerinizi söylemeyi unutursanız veya tablo görünümüne yeni öğeler olduğunu söyler ancak bunları veri modelinize eklemezseniz uygulamanız çökecektir.
     
     // Delege yontemi kullanildigi icin bu action'a gerek kalmadi.
