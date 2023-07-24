@@ -41,6 +41,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
         let item = ToDoListItem()
         item.text = textField.text!
         
+        
         // Mesaj addItemViewController(_:didFinishAdding:) olur ve metin alanındaki metin dizesini içeren yeni bir ToDoListItem nesnesi iletirsiniz.
         delegate?.addItemViewController(self, didFinishAdding: item)
         
@@ -55,7 +56,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return nil
     }
-    
+    // MARK: - Text Field Delegates
     override func viewWillAppear(_ animated: Bool) {
         // Bu satir add ekrani acildiginda textfield'a tiklamadan klavyenin hemen acilmasini saglar
         textField.becomeFirstResponder()
@@ -69,7 +70,9 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
         // Text Field'in metnini alarak ve değiştirme işlemini kendiniz yaparak yeni metnin ne olacağını hesaplamanız gerekir. Bu size newText sabitinde sakladığınız yeni bir array nesnesi verir.
         let oldText = textField.text!
         let stringRange = Range(range, in: oldText)!
-        let newText = oldText.replacingCharacters(in: stringRange, with: string)
+        let newText = oldText.replacingCharacters(
+            in: stringRange,
+            with: string)
         
         // Yeni metni oluşturduktan sonra, boş olup olmadığını kontrol edip ve Done düğmesini buna göre etkinleştirir veya devre dışı bırakıriz.
         if newText.isEmpty {
