@@ -54,14 +54,16 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
         }
     }
     
-    func configureToDoList(for cell: UITableViewCell, with item: ToDoListItem)
+    func configureCheckmark(for cell: UITableViewCell, with item: ToDoListItem)
     {
+        let label = cell.viewWithTag(1001) as! UILabel
+        
       if item.chosen {
-        cell.accessoryType = .checkmark
+          label.text = "✅"
       } else {
-        cell.accessoryType = .none
+          label.text = ""
       }
-    }
+    } 
     
     func configureText(for cell: UITableViewCell, with item: ToDoListItem) {
         
@@ -75,14 +77,13 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-          withIdentifier: "YouHaveToDoItem",
-          for: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "YouHaveToDoItem", for: indexPath)
 
         let item = items[indexPath.row]
 
         configureText(for: cell, with: item)
-        configureToDoList(for: cell, with: item)
+        configureCheckmark(for: cell, with: item)
 
         return cell
     }
@@ -93,7 +94,7 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
         let item = items[indexPath.row]
         item.chosen.toggle()
 
-        configureToDoList(for: cell, with: item)
+        configureCheckmark(for: cell, with: item)
       }
       tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -107,7 +108,6 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
     }
     
     // MARK: - Add Item ViewController Delegates
-    
     func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
         navigationController?.popViewController(animated: true)
     }

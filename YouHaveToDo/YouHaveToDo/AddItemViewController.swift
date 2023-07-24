@@ -8,6 +8,7 @@
 import UIKit
 
 protocol AddItemViewControllerDelegate: AnyObject {
+    
     func addItemViewControllerDidCancel(_ controller: AddItemViewController)
     // didFinishAdding parametresi yeni ToDoListItem nesnesini iletir.
     func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem)
@@ -24,8 +25,6 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     // MARK: - Actions
     // Note: "sender: Any" seklindeki yapi baska bir semder biciminde olursa text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
@@ -33,7 +32,6 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
         
         // Kullanıcı İptal düğmesine dokunduğunda, addItemViewControllerDidCancel(_:) mesajını delegeye geri gönderirsiniz.
         delegate?.addItemViewControllerDidCancel(self)
-        
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
