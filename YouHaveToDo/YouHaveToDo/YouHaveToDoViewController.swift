@@ -41,6 +41,9 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         let item5 = ToDoListItem()
         item5.text = "Fifth Task"
         items.append(item5)
+        
+        print("Documents folder is \(documentsDirectory())")
+        print("Data file path is \(dataFilePath())")
     }
     
     override func prepare(
@@ -75,7 +78,16 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         
         let label = cell.viewWithTag(1000) as! UILabel
         label.text = item.text
-        
+    }
+    
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func dataFilePath() -> URL {
+        return
+        documentsDirectory().appendingPathComponent("YouHaveToDo.plist")
     }
     // MARK: - Table View Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
