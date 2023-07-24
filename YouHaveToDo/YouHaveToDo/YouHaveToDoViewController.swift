@@ -65,7 +65,7 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         let label = cell.viewWithTag(1001) as! UILabel
         
         if item.chosen {
-            label.text = "✅"
+            label.text = "👍🏻"
         } else {
             label.text = ""
         }
