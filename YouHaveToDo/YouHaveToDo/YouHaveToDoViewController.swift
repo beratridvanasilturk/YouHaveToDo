@@ -9,25 +9,7 @@
 import UIKit
 
 class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDelegate {
-    
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
         
-        navigationController?.popViewController(animated: true)
-        
-    }
-    
-    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem) {
-        
-        let newRowIndex = items.count
-        items.append(item)
-        
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
-        
-        navigationController?.popViewController(animated: true)
-    }
-    
     //MARK: - Variables
     
     var items = [ToDoListItem]()
@@ -61,6 +43,24 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
         items.append(item5)
         
         
+    }
+    
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+        
+        navigationController?.popViewController(animated: true)
+        
+    }
+    
+    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ToDoListItem) {
+        
+        let newRowIndex = items.count
+        items.append(item)
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        tableView.insertRows(at: indexPaths, with: .automatic)
+        
+        navigationController?.popViewController(animated: true)
     }
     
     func configureToDoList(for cell: UITableViewCell, at indexPath: IndexPath){
@@ -136,20 +136,22 @@ class YouHaveToDoViewController: UITableViewController, AddItemViewControllerDel
     
         //MARK: - Actions
     // Satırların her zaman hem veri modelinize hem de tablo görünümüne eklenmesi gerektiğini unutmayın. Tablo görünümüne insertRows(at:with:) mesajını gönderdiğinizde şunu söylemiş olursunuz: "Hey table, data modelime bir grup yeni item eklendi." Bu çok önemlidir! Tablo görünümüne yeni öğelerinizi söylemeyi unutursanız veya tablo görünümüne yeni öğeler olduğunu söyler ancak bunları veri modelinize eklemezseniz uygulamanız çökecektir.
-    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-        
-        let newRowIndex = items.count
-        // Yeni bir ToDoListItem nesnesi oluşturuldu.
-        let item = ToDoListItem()
-        item.text = "New Row"
-        // Veri modeline eklendi.
-        items.append(item)
-        //Tablo görünümüne yeni satır hakkında bilgi vermemiz gerekir, böylece bu satır için yeni bir hücre ekleyebilir. Dolayısıyla, önce newRowIndex değişkenindeki satır numarasını kullanarak yeni satıra işaret eden bir IndexPath nesnesi oluşturursunuz.
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        // Bu satır, yalnızca bir index path öğesini tutan yeni, geçici bir dizi oluşturur.
-        let indexPaths = [indexPath]
-        // Bu yöntem aslında isterseniz aynı anda birden fazla satır eklemenize olanak tanır.
-        tableView.insertRows(at: indexPaths, with: .automatic)
-    }
+    
+    // Delege yontemi kullanildigi icin bu action'a gerek kalmadi.
+//    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+//        
+//        let newRowIndex = items.count
+//        // Yeni bir ToDoListItem nesnesi oluşturuldu.
+//        let item = ToDoListItem()
+//        item.text = "New Row"
+//        // Veri modeline eklendi.
+//        items.append(item)
+//        //Tablo görünümüne yeni satır hakkında bilgi vermemiz gerekir, böylece bu satır için yeni bir hücre ekleyebilir. Dolayısıyla, önce newRowIndex değişkenindeki satır numarasını kullanarak yeni satıra işaret eden bir IndexPath nesnesi oluşturursunuz.
+//        let indexPath = IndexPath(row: newRowIndex, section: 0)
+//        // Bu satır, yalnızca bir index path öğesini tutan yeni, geçici bir dizi oluşturur.
+//        let indexPaths = [indexPath]
+//        // Bu yöntem aslında isterseniz aynı anda birden fazla satır eklemenize olanak tanır.
+//        tableView.insertRows(at: indexPaths, with: .automatic)
+//    }
 }
 

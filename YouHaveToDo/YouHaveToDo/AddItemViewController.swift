@@ -73,7 +73,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
         
         // Yeni metni oluşturduktan sonra, boş olup olmadığını kontrol edip ve Done düğmesini buna göre etkinleştirir veya devre dışı bırakıriz.
         if newText.isEmpty {
-            doneBarButton.isHidden = true
+            doneBarButton.isEnabled = false
         } else {
             doneBarButton.isEnabled = true
         }
@@ -86,17 +86,6 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
         doneBarButton.isEnabled = false
         return true
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 
