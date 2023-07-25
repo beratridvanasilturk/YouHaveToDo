@@ -42,6 +42,7 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         item5.text = "Fifth Task"
         items.append(item5)
         
+        // Uygulamanın Belgeler klasörünün gerçekte nerede olduğunu gosterir.
         print("Documents folder is \(documentsDirectory())")
         print("Data file path is \(dataFilePath())")
     }
@@ -80,15 +81,32 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         label.text = item.text
     }
     
+    // iOS, dosya sistemindeki dosyalara başvurmak için URL'leri kullanır.
     func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
     
+    // dataFilePath() yöntemi, kontrol listesi öğelerini depolayacak dosyanın tam yolunu oluşturmak için documentsDirectory() yöntemini kullanır. Bu dosya Checklists.plist olarak adlandırılır ve Documents klasörünün içinde bulunur.
     func dataFilePath() -> URL {
-        return
-        documentsDirectory().appendingPathComponent("YouHaveToDo.plist")
+        return documentsDirectory().appendingPathComponent("YouHaveToDo.plist")
     }
+    // Verileri bir dosyada kaydetme.
+    func saveToDoListItems() {
+        let encoder = PropertyListEncoder()
+        // Encode yöntemi, herhangi bir nedenle veriyi kodlayamazsa swift hata firlatir (error throwing)
+        do {
+            // try anahtar sözcüğü, encode çağrısının başarısız olabileceği durumda bir hata atacağını belirtir.
+            let data = try encoder.encode(items)
+            // Let data önceki satırdaki encode çağrısıyla başarıyla oluşturulduysa, datalari dataFilePath() çağrısıyla döndürülen file yolunu kullanarak bir dosyaya yazarsınız. Write yönteminin de hata verebileceğini unutmayın. Bu nedenle, yöntem çağrısından önce başka bir try deyimi kullanmanız gerekir.
+            try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
+        // Hata yakalama kodu
+        } catch {
+            // Catch bloğu içinde yazdığınız herhangi bir kodda error değişkenine başvurabilirsiniz. Bu, hatanın kaynağının ne olduğunu belirten açıklayıcı bir hata mesajının çıktısını almak için kullanışlı olabilir.
+            print("Error encoding item array: \(error.localizedDescription)")
+        }
+    }
+    
     // MARK: - Table View Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
@@ -115,6 +133,9 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
             configureCheckmark(for: cell, with: item)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Task onay isareti duzenlemesi bittiginde yeni durumu kaydeder
+        saveToDoListItems()
     }
     
     // Swipe to Delete
@@ -128,6 +149,9 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
     // MARK: - Add Item ViewController Delegates
     func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
         navigationController?.popViewController(animated: true)
+        
+        // Task silinmesi bittiginde yeni icerigi kaydeder/datadan siler.
+        saveToDoListItems()
     }
     
     
@@ -141,6 +165,8 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         tableView.insertRows(at: indexPaths, with: .automatic)
         
         navigationController?.popViewController(animated: true)
+        // Task eklemesi bittiginde yeni icerigi kaydeder
+        saveToDoListItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ToDoListItem) {
@@ -152,6 +178,8 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
             }
         }
         navigationController?.popViewController(animated: true)
+        // Task duzenlemesi bittiginde yeni icerigi kaydeder
+        saveToDoListItems()
     }
     
     
