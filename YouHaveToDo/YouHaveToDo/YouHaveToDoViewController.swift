@@ -5,52 +5,27 @@
 //  Created by Berat Rıdvan Asiltürk on 11.07.2023.
 //
 
-// FIXME: Some todo list issues should be fix
 import UIKit
 
 class YouHaveToDoViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
     //MARK: - Variables
-    
     var items = [ToDoListItem]()
-    
-    //MARK: - Outlets
     
     //MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let item1 = ToDoListItem()
-        item1.text = "First Task"
-        items.append(item1)
+        // .plist dosyasindaki dondurulmus verileri uygulamamiza aktararak daha onceden kaydedilen taskleri ToDoListItem icerisine aktarir.
+        loadToDoListItems()
         
-        let item2 = ToDoListItem()
-        item2.text = "Second Task"
-        item2.chosen = true
-        items.append(item2)
-        
-        let item3 = ToDoListItem()
-        item3.text = "Third Task"
-        item3.chosen = true
-        items.append(item3)
-        
-        let item4 = ToDoListItem()
-        item4.text = "Fourth Task"
-        items.append(item4)
-        
-        let item5 = ToDoListItem()
-        item5.text = "Fifth Task"
-        items.append(item5)
-        
-        // Uygulamanın Belgeler klasörünün gerçekte nerede olduğunu gosterir.
+        // Uygulamanın Belgeler klasörünün nerede olduğunu gosterir. Bunu .plist'i bulmak icin kullanacagiz. Gerektiginde .plist dosyasini temizleyerek localde tutulan verileri similatorden temizlemek icin de kullanacagiz.
         print("Documents folder is \(documentsDirectory())")
         print("Data file path is \(dataFilePath())")
     }
     
-    override func prepare(
-        for segue: UIStoryboardSegue,
-        sender: Any?
-    ) {
+    // Segue functionunun segue identifier'a gore duzenlenmesi icin kullanilir
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItem" {
             let controller = segue.destination as! ItemDetailViewController
             controller.delegate = self
@@ -74,7 +49,7 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
             label.text = ""
         }
     }
-    
+    // Text editing icin kullanilir
     func configureText(for cell: UITableViewCell, with item: ToDoListItem) {
         
         let label = cell.viewWithTag(1000) as! UILabel
@@ -87,7 +62,7 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         return paths[0]
     }
     
-    // dataFilePath() yöntemi, kontrol listesi öğelerini depolayacak dosyanın tam yolunu oluşturmak için documentsDirectory() yöntemini kullanır. Bu dosya Checklists.plist olarak adlandırılır ve Documents klasörünün içinde bulunur.
+    // dataFilePath() functionu, todolist öğelerini depolayacak dosyanın tam yolunu oluşturmak için documentsDirectory() yöntemini kullanır. Bu dosya YouHaveToDoList.plist olarak adlandırılır ve Documents klasörünün içinde bulunur.
     func dataFilePath() -> URL {
         return documentsDirectory().appendingPathComponent("YouHaveToDo.plist")
     }
@@ -100,11 +75,31 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
             let data = try encoder.encode(items)
             // Let data önceki satırdaki encode çağrısıyla başarıyla oluşturulduysa, datalari dataFilePath() çağrısıyla döndürülen file yolunu kullanarak bir dosyaya yazarsınız. Write yönteminin de hata verebileceğini unutmayın. Bu nedenle, yöntem çağrısından önce başka bir try deyimi kullanmanız gerekir.
             try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
-        // Hata yakalama kodu
+            // Hata yakalama kodu
         } catch {
             // Catch bloğu içinde yazdığınız herhangi bir kodda error değişkenine başvurabilirsiniz. Bu, hatanın kaynağının ne olduğunu belirten açıklayıcı bir hata mesajının çıktısını almak için kullanışlı olabilir.
             print("Error encoding item array: \(error.localizedDescription)")
         }
+    }
+    
+    // Dosyadan veri okuma, saveToDoListItems functionunun tam tersi seklinde daha once var olan/kaydedilen veriyi okuruz.
+    // Bu kod satiri arraylari YouHaveToDoList.plist dosyasında dondurulmuş olan ToDoListItem nesnelerinin tam kopyalarıyla doldurur.
+    func loadToDoListItems() {
+        // dataFilePath() functionunun sonuçlarını path adlı geçici bir sabite koyarsınız.
+        let path = dataFilePath()
+        // YouHaveToDo.plist'in içeriğini yeni bir Data nesnesine yüklemeyi dener
+        // try? komutu Data nesnesini oluşturmaya çalışır, ancak başarısız olursa nil döndürür. Bu yüzden bir if let deyimi içine konur. .plist dosyası yoksa, yüklenecek ToDoListItem nesnesi de yoktur bu yuzden basarisiz olmasi ihtimaline karsi if let seklinde olusturulur. Bu durum bu uygulama ilk kez baslatildiginda olan seydir yani henuz YouHaveToDo.plist dosyasi mevcut degildir en basta.
+        if let data = try? Data(contentsOf: path) {
+            // Uygulama .plist dosyasıni bulduğunda, bir PropertyListDecoder kullanarak tüm diziyi ve içeriğini dosyadan yükleyeceksiniz. Yani decoder sabitine atar.
+            let decoder = PropertyListDecoder()
+            do {
+                // Kaydedilen verileri decoder'in decode yöntemini kullanarak itemlere (items)'e geri yükler. Burada ilgilenilen tek öğe decode'a aktarılan ilk parametre olacaktır. Decoder'in decode işleminin sonucunda ne tür bir data olacağını bilmesi gerekir ve siz de bunun ToDoListItem nesnelerinden oluşan bir Array olacağını belirterek bunu bilmesini sağlarsınız.
+                items = try decoder.decode([ToDoListItem].self, from: data)
+            } catch {
+                print("Error decoding item array: \(error.localizedDescription)")
+            }
+        }
+        // Artık loadToDoListItem() yönteminiz var, ancak bunun çalışması için bir yerden çağrılması gerekiyor. Bunu yapabileceğiniz birkaç yer vardır. viewDidLoad su asamada dondurulmus verileri uygulamamamiza yukleyecegimiz en mantikli durum konumundadir.
     }
     
     // MARK: - Table View Data Source
@@ -154,7 +149,6 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         saveToDoListItems()
     }
     
-    
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ToDoListItem) {
         
         let newRowIndex = items.count
@@ -181,11 +175,8 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         // Task duzenlemesi bittiginde yeni icerigi kaydeder
         saveToDoListItems()
     }
-    
-    
+}
     //MARK: - Actions
-    @IBAction func editButtonTapped(_ sender: Any) {
-    }
     // Satırların her zaman hem veri modelinize hem de tablo görünümüne eklenmesi gerektiğini unutmayın. Tablo görünümüne insertRows(at:with:) mesajını gönderdiğinizde şunu söylemiş olursunuz: "Hey table, data modelime bir grup yeni item eklendi." Bu çok önemlidir! Tablo görünümüne yeni öğelerinizi söylemeyi unutursanız veya tablo görünümüne yeni öğeler olduğunu söyler ancak bunları veri modelinize eklemezseniz uygulamanız çökecektir.
     
     // Delege yontemi kullanildigi icin bu action'a gerek kalmadi.
@@ -204,5 +195,4 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
     //        // Bu yöntem aslında isterseniz aynı anda birden fazla satır eklemenize olanak tanır.
     //        tableView.insertRows(at: indexPaths, with: .automatic)
     //    }
-}
 

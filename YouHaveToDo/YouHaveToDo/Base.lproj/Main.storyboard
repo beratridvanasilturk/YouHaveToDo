@@ -69,7 +69,7 @@
             </objects>
             <point key="canvasLocation" x="1049.6183206106871" y="-317.6056338028169"/>
         </scene>
-        <!--AddItem-->
+        <!--Add Item-->
         <scene sceneID="fcL-4K-VcQ">
             <objects>
                 <tableViewController id="4K6-H1-n4W" customClass="ItemDetailViewController" customModule="YouHaveToDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -113,7 +113,7 @@
                             <outlet property="delegate" destination="4K6-H1-n4W" id="gcn-yE-WPw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="AddItem" id="dgu-Kp-GiK">
+                    <navigationItem key="navigationItem" title="Add Item" id="dgu-Kp-GiK">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="ze1-me-Tcv">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="4K6-H1-n4W" id="cFe-wr-ICv"/>
