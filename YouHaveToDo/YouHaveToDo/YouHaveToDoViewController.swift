@@ -12,12 +12,18 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
     //MARK: - Variables
     var items = [ToDoListItem]()
     
+    // Checklist sonundaki unlem isareti viewDidLoad() gerçekleşene kadar değerinin geçici olarak nil olmasını sağlar.
+    var checklist: Checklist!
+    
     //MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // .plist dosyasindaki dondurulmus verileri uygulamamiza aktararak daha onceden kaydedilen taskleri ToDoListItem icerisine aktarir.
         loadToDoListItems()
+        
+        // Bu kod satiri navigation bar'da gösterilen ekranın başlığını Checklist nesnesinin adıyla değiştirir
+        title = checklist.name
         
         // Uygulamanın Belgeler klasörünün nerede olduğunu gosterir. Bunu .plist'i bulmak icin kullanacagiz. Gerektiginde .plist dosyasini temizleyerek localde tutulan verileri similatorden temizlemek icin de kullanacagiz.
         print("Documents folder is \(documentsDirectory())")
