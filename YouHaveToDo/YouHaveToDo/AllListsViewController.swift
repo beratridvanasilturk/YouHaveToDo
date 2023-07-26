@@ -72,6 +72,9 @@ class AllListsViewController: UITableViewController {
     // prepare(for:sender:) içinde, YouHaveToDoViewController'a kullanıcının dokunduğu satırdaki Checklist nesnesini geçirmemiz gerekir. Bu nesneyi daha önce sender parametresine koymamızın sebebi budur. (didselectrowat'da)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowYouHaveToDo" {
+            // Note: Type cast, Swift'e bir değeri farklı bir veri türüne sahipmiş gibi yorumlamasını söyler.
+            //  as!: değeri belirttiğiniz türde olmaya zorlar, type cast'ın başarısız olma olasılığı yoktur. Bu nedenle, YuHaveToDoViewController'a özgü özelliklerden herhangi birine erişmeden önce onu genel olan UIViewController türünden bu uygulamada kullanılan özel türe (YouHaveToDoViewController) dönüştürmeniz gerekir.
+            
             let controller = segue.destination as! YouHaveToDoViewController
             controller.checklist = sender as? Checklist
         }
