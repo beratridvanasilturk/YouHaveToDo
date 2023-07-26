@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EA1E24A12A6004F0002850FA /* ToDoListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1E24A02A6004F0002850FA /* ToDoListItem.swift */; };
 		EA3BF0302A6718BC00BFF8FA /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3BF02F2A6718BC00BFF8FA /* ItemDetailViewController.swift */; };
+		EA54C2AE2A71DD9A00CA04F9 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA54C2AD2A71DD9A00CA04F9 /* ListDetailViewController.swift */; };
 		EA5A84BE2A704E7000691DF9 /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A84BD2A704E7000691DF9 /* AllListsViewController.swift */; };
 		EA5A84C02A70858600691DF9 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5A84BF2A70858600691DF9 /* Checklist.swift */; };
 		EAEDBF5A2A5DE6EE006DA8BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEDBF592A5DE6EE006DA8BE /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		EA1E24A02A6004F0002850FA /* ToDoListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListItem.swift; sourceTree = "<group>"; };
 		EA3BF02F2A6718BC00BFF8FA /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
+		EA54C2AD2A71DD9A00CA04F9 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		EA5A84BD2A704E7000691DF9 /* AllListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListsViewController.swift; sourceTree = "<group>"; };
 		EA5A84BF2A70858600691DF9 /* Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
 		EAEDBF562A5DE6EE006DA8BE /* YouHaveToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHaveToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +73,7 @@
 				EA1E24A02A6004F0002850FA /* ToDoListItem.swift */,
 				EA3BF02F2A6718BC00BFF8FA /* ItemDetailViewController.swift */,
 				EA5A84BF2A70858600691DF9 /* Checklist.swift */,
+				EA54C2AD2A71DD9A00CA04F9 /* ListDetailViewController.swift */,
 				EAEDBF5F2A5DE6EE006DA8BE /* Main.storyboard */,
 				EAEDBF622A5DE6F1006DA8BE /* Assets.xcassets */,
 				EAEDBF642A5DE6F1006DA8BE /* LaunchScreen.storyboard */,
@@ -156,6 +159,7 @@
 				EAEDBF5A2A5DE6EE006DA8BE /* AppDelegate.swift in Sources */,
 				EA1E24A12A6004F0002850FA /* ToDoListItem.swift in Sources */,
 				EAEDBF5C2A5DE6EE006DA8BE /* SceneDelegate.swift in Sources */,
+				EA54C2AE2A71DD9A00CA04F9 /* ListDetailViewController.swift in Sources */,
 				EA5A84C02A70858600691DF9 /* Checklist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
