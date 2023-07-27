@@ -9,6 +9,7 @@ import UIKit
 
 class Checklist: NSObject {
     var name = ""
+    var items = [ToDoListItem]()
     
     // Bu init metodu ile Checklist nesnelerinin artık her zaman name özelliğinin olmasi gerektigini garanti eder.
     init(name: String) {

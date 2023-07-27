@@ -65,6 +65,13 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         list = Checklist(name: "VI Checklist")
         lists.append(list)
         
+        // Listeleri olusturmak icin kullanilan for in kodu
+        for list in lists {
+            let item = ToDoListItem()
+            item.text = "Item for \(list.name)"
+            list.items.append(item)
+        }
+        
         // Bu kod satiri cell identifier'imizi table view'e kaydeder, böylece table view, bu cell identifier ile bir dequeue isteği geldiğinde yeni bir table view cell örneği oluşturmak için hangi cell sınıfının kullanılması gerektiğini bilir. Ayrıca, bu durumda, standart table view cell sınıfını yeni cell'ler oluşturmak için kullanılacak sınıf olarak kaydettik,
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
