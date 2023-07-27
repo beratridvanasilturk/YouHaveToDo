@@ -52,7 +52,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Loads local datas
+        // .plist dosyasindaki dondurulmus verileri uygulamamiza aktararak daha onceden kaydedilen taskleri ToDoListItem icerisine aktarir.
         loadChecklists()
         
         // Uygulamanın Belgeler klasörünün nerede olduğunu gosterir. Bunu .plist'i bulmak icin kullanacagiz. Gerektiginde .plist dosyasini temizleyerek localde tutulan verileri similatorden temizlemek icin de kullanacagiz.

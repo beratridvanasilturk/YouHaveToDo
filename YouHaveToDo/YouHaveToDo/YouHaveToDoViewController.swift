@@ -19,18 +19,9 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-// DELETED
-//        // .plist dosyasindaki dondurulmus verileri uygulamamiza aktararak daha onceden kaydedilen taskleri ToDoListItem icerisine aktarir.
-//        loadToDoListItems()
-//
-//
-        
         // Bu kod satiri navigation bar'da gösterilen ekranın başlığını Checklist nesnesinin adıyla değiştirir
         title = checklist.name
-        
-        
-
-        
+    
     }
     
     // Segue functionunun segue identifier'a gore duzenlenmesi icin kullanilir
