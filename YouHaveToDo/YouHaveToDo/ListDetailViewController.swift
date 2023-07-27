@@ -66,11 +66,7 @@ class ListDetailViewController: UITableViewController {
     }
 
     // MARK: - Text Field Delegates
-    func textField(
-      _ textField: UITextField,
-      shouldChangeCharactersIn range: NSRange,
-      replacementString string: String
-    ) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
       let oldText = textField.text!
       let stringRange = Range(range, in: oldText)!
       let newText = oldText.replacingCharacters(
@@ -84,7 +80,5 @@ class ListDetailViewController: UITableViewController {
       doneBarButton.isEnabled = false
       return true
     }
-
-    
 }
 

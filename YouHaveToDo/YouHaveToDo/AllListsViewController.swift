@@ -113,4 +113,14 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
     }
+    
+    // Segue'nin kod ile yazilmasi ornegidir. View Controller bir storyboard'a gömülüdür ve storyboard nesnesinden bunu yüklemesini istemeniz gerekir.View Controller'lar her zaman bir storyboard 'dan yüklenmediği için storyboard özelliği isteğe bağlıdır.
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        // Storyboar'dan yeni view controller olusturulmasi istenir. (identifier ile bu durumda ListDetailVC) Ve bu adim sonrasinda ListDetailViewController scene'de Storyboar ID'yi ListDetailVC olarak ayarlariz.
+        let controller = storyboard?.instantiateViewController(withIdentifier: "ListDetailVC") as! ListDetailViewController
+        controller.delegate = self
+        let checklist = lists[indexPath.row]
+        controller.checklistToEdit = checklist
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }

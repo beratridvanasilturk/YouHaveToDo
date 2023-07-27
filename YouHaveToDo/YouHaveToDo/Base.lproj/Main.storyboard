@@ -67,12 +67,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jjj-Gj-dep" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2095" y="-318"/>
+            <point key="canvasLocation" x="2005" y="-318"/>
         </scene>
         <!--Add Checklist-->
         <scene sceneID="cSy-bQ-rJp">
             <objects>
-                <tableViewController id="Gmx-wu-raE" customClass="ListDetailViewController" customModule="YouHaveToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListDetailVC" id="Gmx-wu-raE" customClass="ListDetailViewController" customModule="YouHaveToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="7Uc-aq-06L">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,7 +119,7 @@
                                 <action selector="cancel" destination="Gmx-wu-raE" id="NqY-xL-DTq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Done" id="g4q-Tl-GLp">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="g4q-Tl-GLp">
                             <connections>
                                 <action selector="done" destination="Gmx-wu-raE" id="Yak-DR-7Rg"/>
                             </connections>
@@ -132,7 +132,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Bd-T1-vne" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1030" y="412"/>
+            <point key="canvasLocation" x="1079" y="416"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="fcL-4K-VcQ">
@@ -227,7 +227,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3W7-PX-XXS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1030" y="-318"/>
+            <point key="canvasLocation" x="1080" y="-318"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zPP-O0-Fkx">
@@ -245,7 +245,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMB-Je-IeM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="122.90076335877862" y="-317.6056338028169"/>
+            <point key="canvasLocation" x="134" y="-318"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
