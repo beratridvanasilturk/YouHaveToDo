@@ -37,8 +37,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             doneBarButton.isEnabled = true
         }
     }
-    
-    
+
     // MARK: - Actions
     // Note: "sender: Any" seklindeki yapi baska bir semder biciminde olursa text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -60,7 +59,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             delegate?.itemDetailViewController(self, didFinishAdding: item)
         }
     }
-    
     
     // MARK: - Table View Delegates
     // Satir secildikten sonra o satira ait gri arka plan gorunumu kaldirir.

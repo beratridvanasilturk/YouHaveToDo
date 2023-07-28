@@ -10,8 +10,6 @@ import UIKit
 class YouHaveToDoViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
     //MARK: - Variables
-//    var items = [ToDoListItem]()
-    
     // Checklist sonundaki unlem isareti viewDidLoad() gerçekleşene kadar değerinin geçici olarak nil olmasını sağlar.
     var checklist: Checklist!
     
@@ -21,7 +19,6 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         
         // Bu kod satiri navigation bar'da gösterilen ekranın başlığını Checklist nesnesinin adıyla değiştirir
         title = checklist.name
-    
     }
     
     // Segue functionunun segue identifier'a gore duzenlenmesi icin kullanilir
@@ -49,16 +46,13 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
             label.text = ""
         }
     }
+    
     // Text editing icin kullanilir
     func configureText(for cell: UITableViewCell, with item: ToDoListItem) {
         
         let label = cell.viewWithTag(1000) as! UILabel
         label.text = item.text
     }
-    
-    
-    
-
     
     // MARK: - Table View Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,10 +80,6 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
             configureCheckmark(for: cell, with: item)
         }
         tableView.deselectRow(at: indexPath, animated: true)
-       
-// DELETED
-//        // Task onay isareti duzenlemesi bittiginde yeni durumu kaydeder
-//        saveToDoListItems()
     }
     
     // Swipe to Delete
@@ -103,10 +93,6 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
     // MARK: - Add Item ViewController Delegates
     func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
         navigationController?.popViewController(animated: true)
-
-// DELETED
-//        // Task silinmesi bittiginde yeni icerigi kaydeder/datadan siler.
-//        saveToDoListItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ToDoListItem) {
@@ -119,10 +105,6 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
         tableView.insertRows(at: indexPaths, with: .automatic)
         
         navigationController?.popViewController(animated: true)
-        
-// DELETED
-//        // Task eklemesi bittiginde yeni icerigi kaydeder
-//        saveToDoListItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ToDoListItem) {
@@ -134,10 +116,6 @@ class YouHaveToDoViewController: UITableViewController, ItemDetailViewController
             }
         }
         navigationController?.popViewController(animated: true)
-        
-// DELETED
-//        // Task duzenlemesi bittiginde yeni icerigi kaydeder
-//        saveToDoListItems()
     }
 }
     //MARK: - Actions
