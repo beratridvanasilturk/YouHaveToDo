@@ -39,7 +39,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     }
 
     // MARK: - Actions
-    // Note: "sender: Any" seklindeki yapi baska bir semder biciminde olursa text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
+    // Note: "sender: Any" seklindeki yapi baska bir sender biciminde olursa (any haricinde) text field'dan klavye girisindeki done butonunu bu done butonuna 'did end on exit' olarak birbiriyle senkron biciminde baglayamazsin.
     @IBAction func cancelButtonTapped(_ sender: Any) {
         
         // Kullanıcı İptal düğmesine dokunduğunda, itemDetailViewControllerDidCancel(_:) mesajını delegeye geri gönderirsiniz.

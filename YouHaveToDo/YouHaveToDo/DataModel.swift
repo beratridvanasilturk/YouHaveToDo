@@ -12,6 +12,7 @@ class DataModel {
     
     init() {
         loadChecklists()
+        registerDefaults()
     }
     
 //    override func viewDidLoad() {
@@ -66,5 +67,12 @@ class DataModel {
             }
         }
         // Artık loadChecklist() yönteminiz var, ancak bunun çalışması için bir yerden çağrılması gerekiyor. Bunu yapabileceğiniz birkaç yer vardır. viewDidLoad su asamada dondurulmus verileri uygulamamamiza yukleyecegimiz en mantikli durum konumundadir.
+    }
+    
+    // UserDefaults, kendisinden bir anahtar istediğinizde ve bu anahtar için bir değer bulamadığında bu sözlükteki varsayilan değerleri kullanacaktır.
+    func registerDefaults() {
+
+        let dictionary = [ "ChecklistIndex": -1 ]
+        UserDefaults.standard.register(defaults: dictionary)
     }
 }
