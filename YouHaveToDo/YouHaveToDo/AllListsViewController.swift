@@ -81,10 +81,10 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         
         navigationController?.delegate = self
 
-        let index = UserDefaults.standard.integer(forKey: "ChecklistIndex")
+        let index = dataModel.indexOfSelectedChecklists
         if index != -1 {
             let checklist = dataModel.lists[index]
-            performSegue(withIdentifier: "ShowChecklist", sender: checklist)
+            performSegue(withIdentifier: "ShowYouHaveToDo", sender: checklist)
 
             print("viewDidAppear")
         }
@@ -93,11 +93,11 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     //MARK: - Navigation Controller Delegates
     // Bu yöntem, navigasyon denetleyicisi yeni bir ekran gösterdiğinde çağrılır.
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        // Is back button tapped?
+        // Geri don (Back) butonu tiklandi mi? kontrolu saglanir
         // Note: === operatörü, iki nesnenin bellekte aynı nesneyi gösterip göstermediğini kontrol eder.
         if viewController === self {
-            UserDefaults.standard.set(-1, forKey: "ChecklistIndex")
-            //  Geri düğmesine basıldıysa, yeni görünüm denetleyicisi AllListsViewController 'ın kendisidir ve UserDefaults 'taki " ChecklistIndex " değerini -1 olarak ayarlarsınız, bu da şu anda hiçbir kontrol listesinin seçili olmadığı anlamına gelir.
+            dataModel.indexOfSelectedChecklists = -1
+            //  Geri düğmesine basıldıysa indexOfSelectedChecklists değerini -1 olarak ayarlarsınız, bu da şu anda hiçbir kontrol listesinin seçili olmadığı anlamına gelir.
         }
     }
     
@@ -117,8 +117,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // Bu yöntemin daha önce yaptığına ek olarak, şimdi seçilen satırın indeksini "ChecklistIndex" anahtarı altında UserDefaults 'ta saklıyorsunuz.
-        UserDefaults.standard.set(indexPath, forKey: "ChecklistIndex")
+        dataModel.indexOfSelectedChecklists = indexPath.row
         
         let checklist = dataModel.lists[indexPath.row]
         // performSegue'nin yönteminin daha önce nil olarak ayarladığımiz bir sender parametresi vardı. Şimdi bunu, kullanıcının dokunduğu satırdaki Checklist nesnesini göndermek için kullanacagiz.
