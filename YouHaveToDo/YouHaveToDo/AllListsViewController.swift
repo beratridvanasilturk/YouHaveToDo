@@ -71,7 +71,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
             let controller = segue.destination as! ListDetailViewController
             controller.delegate = self
             
-            print("prepare")
+            print("  ⚠️  prepare")
         }
     }
     
@@ -86,7 +86,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
             let checklist = dataModel.lists[index]
             performSegue(withIdentifier: "ShowYouHaveToDo", sender: checklist)
 
-            print("viewDidAppear")
+            print("  🎃  viewDidAppear")
         }
     }
     
