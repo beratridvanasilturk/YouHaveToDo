@@ -55,6 +55,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EAE66C4C2A783F7100894DDA /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				EA1E24A02A6004F0002850FA /* ToDoListItem.swift */,
+				EAC7B5772A7330980097006B /* DataModel.swift */,
+				EA5A84BF2A70858600691DF9 /* Checklist.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		EAE66C4D2A783FA500894DDA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EAEDBF5D2A5DE6EE006DA8BE /* YouHaveToDoViewController.swift */,
+				EA3BF02F2A6718BC00BFF8FA /* ItemDetailViewController.swift */,
+				EA5A84BD2A704E7000691DF9 /* AllListsViewController.swift */,
+				EA54C2AD2A71DD9A00CA04F9 /* ListDetailViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EAE66C4E2A783FE000894DDA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EAEDBF5F2A5DE6EE006DA8BE /* Main.storyboard */,
+				EAEDBF622A5DE6F1006DA8BE /* Assets.xcassets */,
+				EAEDBF642A5DE6F1006DA8BE /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		EAEDBF4D2A5DE6EE006DA8BE = {
 			isa = PBXGroup;
 			children = (
@@ -74,22 +105,15 @@
 		EAEDBF582A5DE6EE006DA8BE /* YouHaveToDo */ = {
 			isa = PBXGroup;
 			children = (
-				EAEDBF592A5DE6EE006DA8BE /* AppDelegate.swift */,
-				EAEDBF5B2A5DE6EE006DA8BE /* SceneDelegate.swift */,
-				EAC7B5772A7330980097006B /* DataModel.swift */,
-				EAEDBF5D2A5DE6EE006DA8BE /* YouHaveToDoViewController.swift */,
-				EA5A84BD2A704E7000691DF9 /* AllListsViewController.swift */,
-				EA1E24A02A6004F0002850FA /* ToDoListItem.swift */,
-				EA3BF02F2A6718BC00BFF8FA /* ItemDetailViewController.swift */,
-				EA5A84BF2A70858600691DF9 /* Checklist.swift */,
-				EA54C2AD2A71DD9A00CA04F9 /* ListDetailViewController.swift */,
-				EAEDBF5F2A5DE6EE006DA8BE /* Main.storyboard */,
 				EA7DE7F22A75A08C00F0F309 /* AbcViewController.swift */,
 				EA7DE7F32A75A08C00F0F309 /* AbcViewController.xib */,
-				EA7DE7F62A75A2D200F0F309 /* UIViewController+Extensions.swift */,
-				EAEDBF622A5DE6F1006DA8BE /* Assets.xcassets */,
-				EAEDBF642A5DE6F1006DA8BE /* LaunchScreen.storyboard */,
+				EAEDBF592A5DE6EE006DA8BE /* AppDelegate.swift */,
+				EAE66C4C2A783F7100894DDA /* Data Models */,
 				EAEDBF672A5DE6F1006DA8BE /* Info.plist */,
+				EAE66C4D2A783FA500894DDA /* View Controllers */,
+				EAE66C4E2A783FE000894DDA /* Resources */,
+				EAEDBF5B2A5DE6EE006DA8BE /* SceneDelegate.swift */,
+				EA7DE7F62A75A2D200F0F309 /* UIViewController+Extensions.swift */,
 			);
 			path = YouHaveToDo;
 			sourceTree = "<group>";
