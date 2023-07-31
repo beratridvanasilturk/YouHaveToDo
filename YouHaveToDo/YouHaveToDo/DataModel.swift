@@ -83,7 +83,7 @@ class DataModel {
     // UserDefaults, kendisinden bir anahtar istediğinizde ve bu anahtar için bir değer bulamadığında bu sözlükteki varsayilan değerleri kullanacaktır.
     func registerDefaults() {
 
-        let dictionary = [ "ChecklistIndex": -1 ]
+        let dictionary = [ "ChecklistIndex": -1, "FirstTime": true ] as [String: Any]
         UserDefaults.standard.register(defaults: dictionary)
     }
     

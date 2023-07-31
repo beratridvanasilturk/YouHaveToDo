@@ -22,6 +22,23 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     //MARK: - Variables
     var dataModel: DataModel!
     
+//    // Used For Coutdown Project
+//    func goToNib() {
+//        let abcVC = AbcViewController.loadFromNib()
+//
+//        abcVC.titlee = "SELAM BEBEK"
+//
+//        show(abcVC, sender: nil)
+//    }
+  
+    // Used For Coutdown Project
+//    @IBAction func gotToAbc() {
+//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//        let addItemVc = storyboard.instantiateViewController(withIdentifier: "addItem")
+//        show(addItemVc, sender: nil)
+//    }
+    
+    
     // MARK: - Stubs
     func listDetailViewControllerDidCancel(_ controller: ListDetailViewController) {
         navigationController?.popViewController(animated: true)
@@ -53,7 +70,15 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         
         // Bu kod satiri cell identifier'imizi table view'e kaydeder, böylece table view, bu cell identifier ile bir dequeue isteği geldiğinde yeni bir table view cell örneği oluşturmak için hangi cell sınıfının kullanılması gerektiğini bilir. Ayrıca, bu durumda, standart table view cell sınıfını yeni cell'ler oluşturmak için kullanılacak sınıf olarak kaydettik,
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
     }
+        
+        // Used For Coutdown Project
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+////            self.gotToAbc()
+//            self.goToNib()
+//        }
 
     
     // prepare funtion'u bir view controller'dan segue gerçekleşmeden hemen önce çağrılan hazirlik durumunda gerceklesir.  Burada, görünür hale gelmeden önce yeni view controller'in özelliklerini ayarlama şansımiz olur.
@@ -82,7 +107,10 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         navigationController?.delegate = self
 
         let index = dataModel.indexOfSelectedChecklists
-        if index != -1 {
+        
+        // FIXME: - Need Fix Some Issues
+        if index >= 0 && index < dataModel.lists.count {
+
             let checklist = dataModel.lists[index]
             performSegue(withIdentifier: "ShowYouHaveToDo", sender: checklist)
 
