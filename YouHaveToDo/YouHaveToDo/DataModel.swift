@@ -24,6 +24,7 @@ class DataModel {
     init() {
         loadChecklists()
         registerDefaults()
+        handleFirstTime()
     }
     
 //    override func viewDidLoad() {
@@ -83,8 +84,21 @@ class DataModel {
     // UserDefaults, kendisinden bir anahtar istediğinizde ve bu anahtar için bir değer bulamadığında bu sözlükteki varsayilan değerleri kullanacaktır.
     func registerDefaults() {
 
-        let dictionary = [ "ChecklistIndex": -1, "FirstTime": true ] as [String: Any]
+        let dictionary = [ "ChecklistIndex": -1, "FirstTime": true ] as [String : Any]
+        
         UserDefaults.standard.register(defaults: dictionary)
+    }
+    
+    func handleFirstTime() {
+        let userDefaults = UserDefaults.standard
+        let firtTime = userDefaults.bool(forKey: "FirstTime")
+        // FirstTime degeri true ise uygulama ilk defa calistiriliyor demektir
+        if firtTime {
+            let checklist = Checklist(name: "List")
+            lists.append(checklist)
+            indexOfSelectedChecklists = 0
+            userDefaults.set(false, forKey: "FirstTime")
+        }
     }
     
 }
